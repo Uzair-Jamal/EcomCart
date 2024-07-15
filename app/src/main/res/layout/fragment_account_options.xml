@@ -57,8 +57,8 @@
             style="@style/h2"
             android:layout_marginTop="15dp" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/register_btn"
+        <com.github.leandroborgesferreira.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/register_btn_account_options_fragment"
             android:layout_width="@dimen/mediumButtonWidth"
             android:layout_height="@dimen/mediumButtonHeight"
             style="@style/blueButtonStyle"
@@ -69,13 +69,13 @@
             android:text="Register" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/login_btn"
+            android:id="@+id/login_btn_fragment"
             android:layout_width="@dimen/mediumButtonWidth"
             android:layout_height="@dimen/mediumButtonHeight"
             style="@style/whiteButtonStyle"
-            app:layout_constraintTop_toBottomOf="@id/register_btn"
-            app:layout_constraintStart_toStartOf="@id/register_btn"
-            app:layout_constraintEnd_toEndOf="@id/register_btn"
+            app:layout_constraintTop_toBottomOf="@id/register_btn_account_options_fragment"
+            app:layout_constraintStart_toStartOf="@id/register_btn_account_options_fragment"
+            app:layout_constraintEnd_toEndOf="@id/register_btn_account_options_fragment"
             android:layout_marginTop="20dp"
             android:text="Login" />
 

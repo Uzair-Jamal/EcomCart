@@ -5,6 +5,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -37,13 +38,15 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
 
     //loading button
-    implementation("br.com.simplepass:loading-button-android:2.2.0")
-
+    implementation("com.github.leandroborgesferreira:loading-button-android:2.3.0")
     //Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
@@ -60,12 +63,11 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
 
     //Dagger hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    implementation(libs.firebase.auth)
+    kapt("com.google.dagger:hilt-compiler:2.51.1")
 
     implementation("com.google.gms:google-services:4.4.2")
-
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
