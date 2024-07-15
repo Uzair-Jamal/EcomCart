@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">EcomCart</string>
+    <string name="the_right_address">The Right Address\n For Shopping\n Anyday</string>
+    <string name="tv_quality">It\'s now very easy to reach the\n best quality among all the\n products on the internet</string>
+    <string name="let_s_login">Let\'s Login</string>
+    <string name="account_register">Don\'t have an account? Register</string>
+</resources>
