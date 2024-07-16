@@ -13,9 +13,12 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.ecomcart.R
 import com.example.ecomcart.data.User
 import com.example.ecomcart.databinding.FragmentRegisterBinding
+import com.example.ecomcart.util.RegisterValidation
 import com.example.ecomcart.util.Resource
 import com.example.ecomcart.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 private val TAG = "RegisterFragment"
 @AndroidEntryPoint
@@ -66,6 +69,29 @@ class RegisterFragment : Fragment() {
                  else -> Unit
              }
          }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.validation.collect{validation ->
+                if(validation.email is RegisterValidation.Failed){
+                    withContext(Dispatchers.Main){
+                        binding.etEmail.apply {
+                            requestFocus()
+                            error = validation.email.message
+                        }
+                    }
+                }
+
+                if(validation.password is RegisterValidation.Failed){
+                    withContext(Dispatchers.Main){
+                        binding.etPassword.apply {
+                            requestFocus()
+                            error = validation.password.message
+                        }
+                    }
+                }
+
+            }
         }
 
     }
