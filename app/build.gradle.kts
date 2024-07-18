@@ -44,6 +44,7 @@ android {
 }
 
 dependencies {
+    val nav_version = "2.7.7"
 
     //loading button
     implementation("com.github.leandroborgesferreira:loading-button-android:2.3.0")
@@ -60,8 +61,8 @@ dependencies {
     implementation("com.shuhart.stepview:stepview:1.5.1")
 
     //Android Ktx
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
     //Dagger hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
     implementation(libs.firebase.auth)
