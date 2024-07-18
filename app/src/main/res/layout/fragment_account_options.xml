@@ -57,21 +57,23 @@
             style="@style/h2"
             android:layout_marginTop="15dp" />
 
-        <com.github.leandroborgesferreira.loadingbutton.customViews.CircularProgressButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/register_btn_account_options_fragment"
             android:layout_width="@dimen/mediumButtonWidth"
             android:layout_height="@dimen/mediumButtonHeight"
             style="@style/blueButtonStyle"
+            app:spinning_bar_color="@color/white"
             app:layout_constraintTop_toBottomOf="@id/tvQuality"
             app:layout_constraintStart_toStartOf="@id/tvQuality"
             app:layout_constraintEnd_toEndOf="@id/tvQuality"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="100dp"
             android:text="Register" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login_btn_fragment"
             android:layout_width="@dimen/mediumButtonWidth"
             android:layout_height="@dimen/mediumButtonHeight"
+            app:spinning_bar_color="@color/g_black"
             style="@style/whiteButtonStyle"
             app:layout_constraintTop_toBottomOf="@id/register_btn_account_options_fragment"
             app:layout_constraintStart_toStartOf="@id/register_btn_account_options_fragment"
