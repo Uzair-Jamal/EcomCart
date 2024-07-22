@@ -1,5 +1,6 @@
 package com.example.ecomcart.adapters
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -8,7 +9,11 @@ import com.example.ecomcart.data.Product
 import com.example.ecomcart.databinding.SpecialrvItemBinding
 
 class SpecialProductsAdapter: RecyclerView.Adapter<SpecialProductsAdapter.SpecialProductsViewHolder>() {
-    inner class SpecialProductsViewHolder(private val binding: SpecialrvItemBinding): RecyclerView.ViewHolder(binding.root)
+    inner class SpecialProductsViewHolder(private val binding: SpecialrvItemBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(product: Product) {
+            TODO("Not yet implemented")
+        }
+    }
 
     private val diffCallBack = object: DiffUtil.ItemCallback<Product>(){
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
@@ -23,7 +28,9 @@ class SpecialProductsAdapter: RecyclerView.Adapter<SpecialProductsAdapter.Specia
 
     val differ = AsyncListDiffer(this,diffCallBack)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecialProductsViewHolder {
-        TODO("Not yet implemented")
+        return SpecialProductsViewHolder(
+            SpecialrvItemBinding.inflate(LayoutInflater.from(parent.context),parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -31,6 +38,7 @@ class SpecialProductsAdapter: RecyclerView.Adapter<SpecialProductsAdapter.Specia
     }
 
     override fun onBindViewHolder(holder: SpecialProductsViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val product = differ.currentList[position]
+        holder.bind(product)
     }
 }
