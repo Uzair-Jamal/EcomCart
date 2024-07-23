@@ -1,17 +1,25 @@
 package com.example.ecomcart.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ecomcart.data.Product
-import com.example.ecomcart.databinding.SpecialrvItemBinding
+import com.example.ecomcart.databinding.SpecialRvItemBinding
 
 class SpecialProductsAdapter: RecyclerView.Adapter<SpecialProductsAdapter.SpecialProductsViewHolder>() {
-    inner class SpecialProductsViewHolder(private val binding: SpecialrvItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class SpecialProductsViewHolder(private val binding: SpecialRvItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
-            TODO("Not yet implemented")
+            binding.apply {
+                val imageUrl = product.images[0]
+                Log.d("SpecialProductAdapter","Loading image: $imageUrl")
+                Glide.with(itemView).load(imageUrl).into(imageSpecialRvItem)
+                tvSpecialProductName.text = product.name
+                tvSpecialProductPrice.text = product.price.toString()
+            }
         }
     }
 
@@ -21,20 +29,20 @@ class SpecialProductsAdapter: RecyclerView.Adapter<SpecialProductsAdapter.Specia
         }
 
         override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return newItem.id == oldItem.id
+            return newItem == oldItem
         }
 
     }
 
-    val differ = AsyncListDiffer(this,diffCallBack)
+    val differ = AsyncListDiffer(this, diffCallBack)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecialProductsViewHolder {
         return SpecialProductsViewHolder(
-            SpecialrvItemBinding.inflate(LayoutInflater.from(parent.context),parent, false)
+            SpecialRvItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return differ.currentList.size
     }
 
     override fun onBindViewHolder(holder: SpecialProductsViewHolder, position: Int) {
