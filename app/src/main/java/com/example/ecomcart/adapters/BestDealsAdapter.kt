@@ -1,5 +1,6 @@
 package com.example.ecomcart.adapters
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -13,11 +14,13 @@ class BestDealsAdapter(): RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHol
     inner class BestDealsViewHolder(private val binding: BestDealsRvItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
            binding.apply{
-               Glide.with(itemView).load(product.images).into(imgBestDeal)
+               val imageUrl = product.images[0]
+               Glide.with(itemView).load(imageUrl).into(imgBestDeal)
                product.offerPercentage?.let {
                    val remainingPrice = 1f - it
                    val priceAfterOffer = product.price * remainingPrice
                    tvNewPrice.text = "$ ${String.format("%.2f",priceAfterOffer)}"
+                   tvOldPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                }
                tvOldPrice.text = "$ ${product.price}"
                tvDealProductName.text = product.name

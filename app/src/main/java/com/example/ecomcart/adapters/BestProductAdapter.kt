@@ -1,5 +1,6 @@
 package com.example.ecomcart.adapters
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,16 +15,19 @@ class BestProductAdapter():RecyclerView.Adapter<BestProductAdapter.BestProductVi
     inner class BestProductViewHolder(private val binding: ProductRvItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             binding.apply {
-                Glide.with(itemView).load(product.images).into(imgProduct)
+                val imageUrl = product.images[0]
+                Glide.with(itemView).load(imageUrl).into(imgProduct)
                 product.offerPercentage?.let{
                     val remainingPricePercentage = 1f - it
                     val priceAfterOffer = product.price * remainingPricePercentage
                     tvNewPrice.text = "$ ${String.format("%.2f",priceAfterOffer)}"
+                    tvPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 }
                 if (product.offerPercentage == null)
                     tvNewPrice.visibility = View.INVISIBLE
                 tvPrice.text = "$ ${product.price}"
                 tvName.text = product.name
+
             }
         }
     }
