@@ -6,4 +6,6 @@
     <string name="account_register">Don\'t have an account? Register</string>
     <string name="let_s_register">Let\'s Register</string>
     <string name="log_in">Do you have an account? Log in</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

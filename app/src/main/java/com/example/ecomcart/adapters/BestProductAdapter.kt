@@ -12,7 +12,9 @@ import com.example.ecomcart.data.Product
 import com.example.ecomcart.databinding.ProductRvItemBinding
 
 class BestProductAdapter():RecyclerView.Adapter<BestProductAdapter.BestProductViewHolder>() {
-    inner class BestProductViewHolder(private val binding: ProductRvItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class BestProductViewHolder(private val binding: ProductRvItemBinding):
+        RecyclerView.ViewHolder(binding.root) {
+
         fun bind(product: Product) {
             binding.apply {
                 val imageUrl = product.images[0]
