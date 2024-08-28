@@ -46,15 +46,15 @@ class SizesAdapter() : RecyclerView.Adapter<SizesAdapter.SizesViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: SizesViewHolder, position: Int) {
-        val size = differ.currentList[position]
-        holder.bind(size.toString(), position)
+        val size = differ.currentList[position].toString()
+        holder.bind(size, position)
 
         holder.itemView.setOnClickListener {
             if(selectedPosition >= 0)
                 notifyItemChanged(selectedPosition)
             selectedPosition = holder.adapterPosition
             notifyItemChanged(selectedPosition)
-            onItemClick?.invoke(size.toString())
+            onItemClick?.invoke(size)
         }
     }
 
