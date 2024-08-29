@@ -24,12 +24,12 @@ class SizesAdapter() : RecyclerView.Adapter<SizesAdapter.SizesViewHolder>(){
         }
     }
 
-    private val diffCallback = object: DiffUtil.ItemCallback<Int>(){
-        override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
+    private val diffCallback = object: DiffUtil.ItemCallback<String>(){
+        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Int, newItem: Int): Boolean {
+        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
             return oldItem == newItem
         }
 
@@ -46,7 +46,7 @@ class SizesAdapter() : RecyclerView.Adapter<SizesAdapter.SizesViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: SizesViewHolder, position: Int) {
-        val size = differ.currentList[position].toString()
+        val size = differ.currentList[position]
         holder.bind(size, position)
 
         holder.itemView.setOnClickListener {

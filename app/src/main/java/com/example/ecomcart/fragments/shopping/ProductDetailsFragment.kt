@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
@@ -15,6 +16,7 @@ import com.example.ecomcart.adapters.ColorsAdapter
 import com.example.ecomcart.adapters.SizesAdapter
 import com.example.ecomcart.adapters.ViewPager2Images
 import com.example.ecomcart.databinding.FragmentProductDetailsBinding
+import com.example.ecomcart.util.hideBottomNavigationView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ProductDetailsFragment: Fragment() {
@@ -30,10 +32,7 @@ class ProductDetailsFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val bottomNavigationView = (activity as ShoppingActivity).findViewById<BottomNavigationView>(
-            R.id.bottomNavigationMenu
-        )
-        bottomNavigationView.visibility = View.GONE
+        hideBottomNavigationView()
 
         binding = FragmentProductDetailsBinding.inflate(inflater)
         return binding.root
@@ -49,15 +48,25 @@ class ProductDetailsFragment: Fragment() {
         setupColorsRv()
         setupViewPagerRv()
 
+        binding.crossImage.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         binding.apply {
             tvProductName.text = product.name
             tvProductPrice.text = "$ ${product.price}"
             tvProductDescription.text = product.description
         }
 
+        if(product.colors.isNullOrEmpty())
+            binding.tvProductColor.visibility = View.INVISIBLE
+
+        if(product.sizes.isNullOrEmpty())
+            binding.tvProductSize.visibility = View.INVISIBLE
+
         viewPagerAdapter.differ.submitList(product.images)
         product.colors?.let{colorsAdapter.differ.submitList(it)}
-        product.sizes?.map { it.toIntOrNull() }?.let{sizesAdapter.differ.submitList(it)}
+        product.sizes?.let{sizesAdapter.differ.submitList(it)}
     }
 
     private fun setupViewPagerRv() {
@@ -69,7 +78,7 @@ class ProductDetailsFragment: Fragment() {
     private fun setupColorsRv() {
         binding.apply {
             productColorRv.adapter = colorsAdapter
-            productColorRv.layoutManager = LinearLayoutManager(requireContext())
+            productColorRv.layoutManager = LinearLayoutManager(requireContext(), HORIZONTAL,false)
         }
     }
 

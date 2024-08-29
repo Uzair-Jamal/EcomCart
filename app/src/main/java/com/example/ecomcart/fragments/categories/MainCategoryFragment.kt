@@ -20,6 +20,7 @@ import com.example.ecomcart.adapters.BestProductAdapter
 import com.example.ecomcart.adapters.SpecialProductsAdapter
 import com.example.ecomcart.databinding.FragmentMainCategoryBinding
 import com.example.ecomcart.util.Resource
+import com.example.ecomcart.util.showBottomNavigationView
 import com.example.ecomcart.viewmodel.MainCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -66,7 +67,7 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
         }
 
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenStarted {
             viewModel.specialProducts.collectLatest {
                 when(it){
                     is Resource.Loading -> {
@@ -86,7 +87,7 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
             }
         }
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenStarted {
             viewModel.bestDealsProducts.collectLatest {
                 when(it){
                     is Resource.Loading -> {
@@ -106,7 +107,7 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
             }
         }
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenStarted {
             viewModel.bestProducts.collectLatest {
                 when(it){
                     is Resource.Loading -> {
@@ -164,5 +165,11 @@ class MainCategoryFragment: Fragment(R.layout.fragment_main_category) {
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
             adapter = specialProductsAdapter
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        showBottomNavigationView()
     }
 }
